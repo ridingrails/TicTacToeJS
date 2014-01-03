@@ -6,10 +6,12 @@
 
   var Game = TTT.Game = function TT() {
     this.player = Game.marks[0];
+    this.playerColor = Game.playerColors[0];
     this.board = this.makeBoard();
   }
 
   Game.marks = ["x", "o"];
+  Game.playerColors = ["red", "blue"];
 
   Game.prototype.diagonalWinner = function () {
     var game = this;
@@ -84,13 +86,16 @@
   Game.prototype.placeMark = function (div, pos) {
     this.board[pos[0]][pos[1]] = this.player;
     $(div).html(this.player);
+    $(div).css("background-color", this.playerColor);
   };
 
   Game.prototype.switchPlayer = function () {
     if (this.player === Game.marks[0]) {
       this.player = Game.marks[1];
+      this.playerColor = Game.playerColors[1];
     } else {
       this.player = Game.marks[0];
+      this.playerColor = Game.playerColors[0];
     }
   };
 
