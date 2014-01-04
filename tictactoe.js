@@ -149,34 +149,25 @@
     })
   }
 
-  Game.prototype.run = function () {
-    var game = this;
-
-    game.turn(function(){
-      if (game.winner()) {
-        console.log("Someone won!");
-      } else {
-        game.printBoard();
-        game.run();
-      }
-    });
-  }
-
   Game.prototype.turn = function (div) {
+
+    var game = this;
 
     var y = $(div).data('y');
     var x = $(div.parentNode).data('x');
     console.log( "[" + x + "," + y + "]");
     var coords = [x,y];
 
-    var game = this;
-
     if (game.valid(coords)) {
-      game.move(div, coords);
-      // insert marks
+      game.move(div, coords); // insert marks
+      if (game.winner()) {
+        alert("Someone won!");
+      }
     } else {
-      console.log("Invalid coords!");
+      alert("Invalid coords!");
     }
+
+
   }
 
 })(this);
